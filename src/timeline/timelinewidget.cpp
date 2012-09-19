@@ -96,8 +96,11 @@ void TimeLineWidget::closeEditor(Joint *joint)
 
 void TimeLineWidget::updateEditors()
 {
+  // To correctly update the editors, we must close it
   closeEditor(m_root);
-//  m_root->setAnimation(-1);
+  // Unset any previous animation
+  m_root->setAnimation(-1);
+  // Set the current animation
   m_root->setAnimation(ui->comboBox->currentIndex());
   openEditor(m_root);
 }
