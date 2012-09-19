@@ -1,0 +1,9 @@
+[submodule "extlibs/QxGraphics"]
+	path = extlibs/QxGraphics
+	url = https://github.com/Skyrpex/QxGraphics.git
+[submodule "extlibs/QxMesh"]
+	path = extlibs/QxMesh
+	url = https://github.com/Skyrpex/QxMesh.git
+[submodule "extlibs/QxTimeLineEditor"]
+	path = extlibs/QxTimeLineEditor
+	url = https://github.com/Skyrpex/QxTimeLineEditor.git
