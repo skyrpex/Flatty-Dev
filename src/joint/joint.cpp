@@ -33,7 +33,10 @@ QList<Joint *> Joint::childJoints() const
 void Joint::setAnimation(int i)
 {
   if(i != -1)
+  {
     JointTreeItem::setAnimation(m_animations.at(i));
+    setFrame(0);
+  }
   else
     JointTreeItem::setAnimation(NULL);
 
@@ -43,12 +46,12 @@ void Joint::setAnimation(int i)
 
 void Joint::setFrame(int i)
 {
+  qDebug() << "Joint" << __FUNCTION__ << i;
   FrameData *frameData = animation()->value(i, NULL);
-  if(frameData)
-    setFrameData(frameData);
-  else
-    setDisplayFrameData(animation()->displayFrameData(i));
-  //setFrameData()
+//  if(frameData)
+//    setFrameData(frameData);
+//  else
+//    setDisplayFrameData(animation()->displayFrameData(i));
 
   foreach(Joint *child, childJoints())
     child->setFrame(i);

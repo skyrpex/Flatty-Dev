@@ -59,7 +59,7 @@ TimeLineWidget::TimeLineWidget(QWidget *parent) :
 
 
   connect(m_header, SIGNAL(currentFrameChangedByUser(int)),
-          m_delegate, SIGNAL(currentFrameChangedByUser(int)));
+          m_delegate, SIGNAL(currentFrameChanged(int)));
   connect(m_delegate, SIGNAL(currentFrameChangedByUser(int)),
           m_header, SLOT(setCurrentFrame(int)));
 
@@ -90,10 +90,15 @@ QAbstractItemModel *TimeLineWidget::model() const
 
 void TimeLineWidget::setRootJoint(Joint *joint)
 {
-//  m_root = new Joint;
-//  m_root->setName("Root");
+  Q_ASSERT(joint);
+
   m_root = joint;
+
   ui->treeWidget->addTopLevelItem(m_root);
+
+
+  connect(m_header, SIGNAL(currentFrameChangedByUser(int)),
+          m_root, SLOT(setFrame(int)));
 }
 
 void TimeLineWidget::openEditor(Joint *joint)

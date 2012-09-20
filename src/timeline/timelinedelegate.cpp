@@ -17,7 +17,8 @@ QWidget *TimeLineDelegate::createEditor(QWidget *parent, const QStyleOptionViewI
   {
     TimeLineEditor *editor = new TimeLineEditor(parent);
     connect(editor, SIGNAL(currentFrameChangedByUser(int)), this, SIGNAL(currentFrameChangedByUser(int)));
-    connect(this, SIGNAL(currentFrameChangedByUser(int)), editor, SLOT(setCurrentFrame(int)));
+    connect(this, SIGNAL(currentFrameChangedByUser(int)), this, SIGNAL(currentFrameChanged(int)));
+    connect(this, SIGNAL(currentFrameChanged(int)), editor, SLOT(setCurrentFrame(int)));
     return editor;
   }
 
@@ -44,5 +45,5 @@ QSize TimeLineDelegate::sizeHint(const QStyleOptionViewItem &option, const QMode
 
 void TimeLineDelegate::setCurrentFrame(int frame)
 {
-  emit currentFrameChangedByUser(frame);
+  emit currentFrameChanged(frame);
 }

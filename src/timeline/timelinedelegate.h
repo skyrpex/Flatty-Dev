@@ -18,6 +18,7 @@ public slots:
   void setCurrentFrame(int frame);
 
 signals:
+  void currentFrameChanged(int frame);
   void currentFrameChangedByUser(int frame);
 };
 

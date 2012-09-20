@@ -1,6 +1,7 @@
 #include "jointgraphicsitem.h"
 #include <QBrush>
 #include <QPen>
+#include <QDebug>
 
 static const int HALF_WIDTH = 10;
 static const QBrush JOINT_BRUSH(Qt::white);
@@ -14,14 +15,19 @@ JointGraphicsItem::JointGraphicsItem()
   setPen(JOINT_PEN);
   setFlags(ItemIsMovable
            | ItemIgnoresTransformations);
+
+  setEnabled(false);
 }
 
 void JointGraphicsItem::setFrameData(FrameData *frameData)
 {
-  if(frameData)
-    setDisplayFrameData(*frameData);
-
+  qDebug() << "JointGraphicsItem" << __FUNCTION__ << (int)frameData;
   m_frameData = frameData;
+
+  if(m_frameData)
+    m_displayFrameData = *m_frameData;
+
+  setEnabled(m_frameData);
 }
 
 FrameData *JointGraphicsItem::frameData() const
@@ -31,6 +37,7 @@ FrameData *JointGraphicsItem::frameData() const
 
 void JointGraphicsItem::setDisplayFrameData(const FrameData &frameData)
 {
+  qDebug() << "JointGraphicsItem" << __FUNCTION__;
   m_frameData = NULL;
   m_displayFrameData = frameData;
 }
