@@ -13,8 +13,7 @@ TimeLineWidget::TimeLineWidget(QWidget *parent) :
   ui->setupUi(this);
 
   // Set stretch factors
-  ui->splitter->setStretchFactor(ui->splitter->indexOf(ui->treeView), 1);
-  ui->splitter->setStretchFactor(ui->splitter->indexOf(ui->treeWidget), 6);
+  ui->splitter->setStretchFactor(ui->splitter->indexOf(ui->treeWidget), 8);
 
   // Setup tree widget (timeline)
   ui->treeWidget->setItemDelegate(m_delegate);
