@@ -9,11 +9,11 @@ class JointGraphicsItem : public QGraphicsEllipseItem
 public:
   JointGraphicsItem();
 
-  void setFrameData(FrameData *frameData);
-  FrameData *frameData() const;
+  void setCurrentFrameData(FrameData *currentFrameData);
+  FrameData *currentFrameData() const;
 
-  void setDisplayFrameData(const FrameData &frameData);
-  FrameData displayFrameData() const;
+  void setCurrentDisplayFrameData(const FrameData &currentFrameData);
+  FrameData currentDisplayFrameData() const;
 
 private:
   FrameData *m_frameData;

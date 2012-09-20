@@ -5,7 +5,7 @@ JointTreeItem::JointTreeItem(JointTreeItem *parent)
   : QTreeWidgetItem(parent)
 {
   setFlags(flags() | Qt::ItemIsEditable);
-  setAnimation(NULL);
+  setCurrentAnimation(NULL);
 //  setAnimation(new Animation);
 }
 
@@ -36,13 +36,13 @@ QList<JointTreeItem *> JointTreeItem::childItems() const
   return children;
 }
 
-void JointTreeItem::setAnimation(Animation *animation)
+void JointTreeItem::setCurrentAnimation(Animation *animation)
 {
   setData(TimeLineColumn, Qt::DisplayRole,
           QVariant::fromValue<Animation*>(animation));
 }
 
-Animation *JointTreeItem::animation() const
+Animation *JointTreeItem::currentAnimation() const
 {
   return qVariantValue<Animation*>(data(TimeLineColumn, Qt::DisplayRole));
 }

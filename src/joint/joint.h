@@ -18,9 +18,9 @@ public:
 public slots:
   void createAnimation();
   void removeAnimation(int i);
-  void setAnimation(int i);
-  void setAnimationLength(int i);
-  void setFrame(int i);
+  void setCurrentAnimation(int i);
+  void setCurrentAnimationLength(int i);
+  void setCurrentFrame(int i);
 
 private:
   QList<Animation*> m_animations;

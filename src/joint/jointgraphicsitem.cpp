@@ -19,9 +19,8 @@ JointGraphicsItem::JointGraphicsItem()
   setEnabled(false);
 }
 
-void JointGraphicsItem::setFrameData(FrameData *frameData)
+void JointGraphicsItem::setCurrentFrameData(FrameData *frameData)
 {
-  qDebug() << "JointGraphicsItem" << __FUNCTION__ << (int)frameData;
   m_frameData = frameData;
 
   if(m_frameData)
@@ -30,19 +29,20 @@ void JointGraphicsItem::setFrameData(FrameData *frameData)
   setEnabled(m_frameData);
 }
 
-FrameData *JointGraphicsItem::frameData() const
+FrameData *JointGraphicsItem::currentFrameData() const
 {
   return m_frameData;
 }
 
-void JointGraphicsItem::setDisplayFrameData(const FrameData &frameData)
+void JointGraphicsItem::setCurrentDisplayFrameData(const FrameData &frameData)
 {
-  qDebug() << "JointGraphicsItem" << __FUNCTION__;
   m_frameData = NULL;
   m_displayFrameData = frameData;
+
+  setEnabled(false);
 }
 
-FrameData JointGraphicsItem::displayFrameData() const
+FrameData JointGraphicsItem::currentDisplayFrameData() const
 {
   return m_displayFrameData;
 }

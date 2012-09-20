@@ -36,30 +36,37 @@ void TimeLineEditor::setAnimation(Animation *animation)
 
 void TimeLineEditor::setCurrentFrame(int frame)
 {
-  m_marker->setPos(frame*8, 0);
+  if(m_currentFrame != frame)
+  {
+    m_currentFrame = frame;
+    emit currentFrameChanged(frame);
+    m_marker->setPos(frame*8, 0);
+  }
 }
 
 void TimeLineEditor::contextMenuEvent(QContextMenuEvent *event)
 {
   // We want to keep the first frame
-  if(frameAt(event->pos()) > 0)
+  int frame = frameAt(event->pos());
+  if(frame > 0)
     QxTimeLineEditor::contextMenuEvent(event);
+  setCurrentFrame(frame);
 }
 
 void TimeLineEditor::mousePressEvent(QMouseEvent *event)
 {
   // We want to keep the first frame
-  if(frameAt(event->pos()) > 0)
+  int frame = frameAt(event->pos());
+  if(frame > 0)
     QxTimeLineEditor::mousePressEvent(event);
 
-  emit currentFrameChangedByUser(frameAt(event->pos()));
+  setCurrentFrame(frame);
 }
 
 void TimeLineEditor::mouseMoveEvent(QMouseEvent *event)
 {
   QxTimeLineEditor::mouseMoveEvent(event);
-
-  emit currentFrameChangedByUser(frameAt(event->pos()));
+  setCurrentFrame(frameAt(event->pos()));
 }
 
 bool TimeLineEditor::addKeyFrame(int frame)

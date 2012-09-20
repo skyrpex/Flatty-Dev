@@ -26,8 +26,12 @@ int TimeLineHeader::currentFrame() const
 
 void TimeLineHeader::setCurrentFrame(int frame)
 {
-  m_currentFrame = frame;
-  viewport()->update();
+  if(m_currentFrame != frame)
+  {
+    m_currentFrame = frame;
+    emit currentFrameChanged(m_currentFrame);
+    viewport()->update();
+  }
 }
 
 void TimeLineHeader::paintSection(QPainter *painter, const QRect &rect, int logicalIndex) const
@@ -113,5 +117,4 @@ void TimeLineHeader::updateCurrentFrame(const QPoint &pos)
 //  viewport()->repaint();
 
   setCurrentFrame((0.5 + pos.x() + offset() - sectionPosition(Joint::TimeLineColumn))/8);
-  emit currentFrameChangedByUser(m_currentFrame);
 }

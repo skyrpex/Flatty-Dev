@@ -6,7 +6,8 @@
 static const int HEADER_HEIGHT = 20;
 
 TimeLineDelegate::TimeLineDelegate(QObject *parent) :
-  QStyledItemDelegate(parent)
+  QStyledItemDelegate(parent),
+  m_currentFrame(0)
 {
 }
 
@@ -16,8 +17,7 @@ QWidget *TimeLineDelegate::createEditor(QWidget *parent, const QStyleOptionViewI
   if(qVariantCanConvert<Animation*>(index.data()))
   {
     TimeLineEditor *editor = new TimeLineEditor(parent);
-    connect(editor, SIGNAL(currentFrameChangedByUser(int)), this, SIGNAL(currentFrameChangedByUser(int)));
-    connect(this, SIGNAL(currentFrameChangedByUser(int)), this, SIGNAL(currentFrameChanged(int)));
+    connect(editor, SIGNAL(currentFrameChanged(int)), this, SIGNAL(currentFrameChanged(int)));
     connect(this, SIGNAL(currentFrameChanged(int)), editor, SLOT(setCurrentFrame(int)));
     return editor;
   }
@@ -37,6 +37,17 @@ void TimeLineDelegate::setEditorData(QWidget *editor, const QModelIndex &index) 
     QStyledItemDelegate::setEditorData(editor, index);
 }
 
+void TimeLineDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
+{
+  if(qVariantCanConvert<Animation*>(index.data()))
+  {
+    // ALERT - It is important to keep this function as is is, even if it does nothing.
+    // It overrides the default behavior, and we want to keep the model data unchanged.
+  }
+  else
+    QStyledItemDelegate::setModelData(editor, model, index);
+}
+
 QSize TimeLineDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
   QSize size = QStyledItemDelegate::sizeHint(option, index);
@@ -45,5 +56,9 @@ QSize TimeLineDelegate::sizeHint(const QStyleOptionViewItem &option, const QMode
 
 void TimeLineDelegate::setCurrentFrame(int frame)
 {
-  emit currentFrameChanged(frame);
+  if(m_currentFrame != frame)
+  {
+    m_currentFrame = frame;
+    emit currentFrameChanged(frame);
+  }
 }

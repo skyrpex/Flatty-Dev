@@ -30,41 +30,43 @@ QList<Joint *> Joint::childJoints() const
   return children;
 }
 
-void Joint::setAnimation(int i)
+void Joint::setCurrentAnimation(int i)
 {
   if(i != -1)
   {
-    JointTreeItem::setAnimation(m_animations.at(i));
-    setFrame(0);
+    JointTreeItem::setCurrentAnimation(m_animations.at(i));
+    setCurrentFrame(0);
   }
   else
-    JointTreeItem::setAnimation(NULL);
+    JointTreeItem::setCurrentAnimation(NULL);
 
   foreach(Joint *child, childJoints())
-    child->setAnimation(i);
+    child->setCurrentAnimation(i);
 }
 
-void Joint::setFrame(int i)
+void Joint::setCurrentFrame(int i)
 {
-  qDebug() << "Joint" << __FUNCTION__ << i;
-  FrameData *frameData = animation()->value(i, NULL);
-//  if(frameData)
-//    setFrameData(frameData);
-//  else
-//    setDisplayFrameData(animation()->displayFrameData(i));
+  Animation *anim = currentAnimation();
+  Q_ASSERT(anim);
+
+  FrameData *frameData = anim->value(i, NULL);
+  if(frameData)
+    setCurrentFrameData(frameData);
+  else
+    setCurrentDisplayFrameData(anim->displayFrameData(i));
 
   foreach(Joint *child, childJoints())
-    child->setFrame(i);
+    child->setCurrentFrame(i);
 }
 
-void Joint::setAnimationLength(int i)
+void Joint::setCurrentAnimationLength(int i)
 {
-  Animation *anim = animation();
+  Animation *anim = currentAnimation();
   if(anim)
     anim->setLength(i);
 
   foreach(Joint *child, childJoints())
-    child->setAnimationLength(i);
+    child->setCurrentAnimationLength(i);
 }
 
 void Joint::createAnimation()

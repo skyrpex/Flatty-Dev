@@ -21,8 +21,8 @@ public:
   JointTreeItem *parentItem() const;
   QList<JointTreeItem*> childItems() const;
 
-  void setAnimation(Animation *animation);
-  Animation *animation() const;
+  void setCurrentAnimation(Animation *currentAnimation);
+  Animation *currentAnimation() const;
 };
 
 #endif // JOINTTREEITEM_H

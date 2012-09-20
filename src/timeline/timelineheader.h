@@ -15,7 +15,7 @@ public slots:
   void setCurrentFrame(int frame);
 
 signals:
-  void currentFrameChangedByUser(int frame);
+  void currentFrameChanged(int frame);
 
 protected:
   void paintSection(QPainter *painter, const QRect &rect, int logicalIndex) const;

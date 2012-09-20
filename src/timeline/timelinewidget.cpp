@@ -58,9 +58,9 @@ TimeLineWidget::TimeLineWidget(QWidget *parent) :
           ui->treeWidget->verticalScrollBar(), SLOT(setValue(int)));
 
 
-  connect(m_header, SIGNAL(currentFrameChangedByUser(int)),
-          m_delegate, SIGNAL(currentFrameChanged(int)));
-  connect(m_delegate, SIGNAL(currentFrameChangedByUser(int)),
+  connect(m_header, SIGNAL(currentFrameChanged(int)),
+          m_delegate, SLOT(setCurrentFrame(int)));
+  connect(m_delegate, SIGNAL(currentFrameChanged(int)),
           m_header, SLOT(setCurrentFrame(int)));
 
 
@@ -97,8 +97,8 @@ void TimeLineWidget::setRootJoint(Joint *joint)
   ui->treeWidget->addTopLevelItem(m_root);
 
 
-  connect(m_header, SIGNAL(currentFrameChangedByUser(int)),
-          m_root, SLOT(setFrame(int)));
+  connect(m_header, SIGNAL(currentFrameChanged(int)),
+          m_root, SLOT(setCurrentFrame(int)));
 }
 
 void TimeLineWidget::openEditor(Joint *joint)
@@ -153,7 +153,7 @@ void TimeLineWidget::on_addButton_clicked()
 void TimeLineWidget::on_comboBox_currentIndexChanged(int index)
 {
   // Set the current animation
-  m_root->setAnimation(index);
+  m_root->setCurrentAnimation(index);
 
   // Update the editors (to resize the header)
   updateEditors();
@@ -172,7 +172,7 @@ void TimeLineWidget::on_framesButton_clicked()
     return;
 
   // Set the animation length
-  m_root->setAnimationLength(length);
+  m_root->setCurrentAnimationLength(length);
 
   // Update the editors (to resize the header)
   updateEditors();

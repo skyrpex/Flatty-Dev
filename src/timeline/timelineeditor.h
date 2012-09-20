@@ -19,7 +19,7 @@ public slots:
   void setCurrentFrame(int frame);
 
 signals:
-  void currentFrameChangedByUser(int frame);
+  void currentFrameChanged(int frame);
 
 protected:
   void contextMenuEvent(QContextMenuEvent *event);
@@ -32,6 +32,7 @@ protected:
 private:
   Animation *m_animation;
   QGraphicsLineItem *m_marker;
+  int m_currentFrame;
 };
 
 #endif // TIMELINEEDITOR_H
