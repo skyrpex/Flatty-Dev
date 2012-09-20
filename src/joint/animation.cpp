@@ -21,4 +21,13 @@ int Animation::length() const
 void Animation::setLength(int length)
 {
   m_length = length;
+
+  Iterator it = begin();
+  while(it != end())
+  {
+    if(it.key() > m_length)
+      it = erase(it);
+    else
+      ++it;
+  }
 }

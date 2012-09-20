@@ -57,10 +57,9 @@ void Joint::setFrame(int i)
 void Joint::setAnimationLength(int i)
 {
   Animation *anim = animation();
-  if(!anim)
-    return;
+  if(anim)
+    anim->setLength(i);
 
-  anim->setLength(i);
   foreach(Joint *child, childJoints())
     child->setAnimationLength(i);
 }
