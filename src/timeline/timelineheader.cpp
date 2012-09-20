@@ -17,7 +17,7 @@ TimeLineHeader::TimeLineHeader(QWidget *parent) :
 void TimeLineHeader::setCurrentFrame(int frame)
 {
   m_currentFrame = frame;
-  viewport()->repaint();
+  viewport()->update();
 }
 
 void TimeLineHeader::paintSection(QPainter *painter, const QRect &rect, int logicalIndex) const
