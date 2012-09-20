@@ -5,6 +5,11 @@
 #include <QDateTime>
 #include <joint/joint.h>
 
+//static const QBrush MARKER_BRUSH(QColor(250, 160, 170));
+//static const QPen MARKER_PEN(QColor(200, 90, 90));
+static const QBrush MARKER_BRUSH(QColor(250, 150, 150));
+static const QPen MARKER_PEN(QColor(250, 0, 0));
+
 TimeLineHeader::TimeLineHeader(QWidget *parent) :
   QHeaderView(Qt::Horizontal, parent),
   m_currentFrame(0)
@@ -12,6 +17,11 @@ TimeLineHeader::TimeLineHeader(QWidget *parent) :
   // Make sure a scrollbar appears
   setResizeMode(ResizeToContents);
   setStretchLastSection(false);
+}
+
+int TimeLineHeader::currentFrame() const
+{
+  return m_currentFrame;
 }
 
 void TimeLineHeader::setCurrentFrame(int frame)
@@ -59,8 +69,8 @@ void TimeLineHeader::paintSection(QPainter *painter, const QRect &rect, int logi
   painter->restore();
 
   // Red square (time marker)
-  painter->setBrush(QColor(250, 160, 170));
-  painter->setPen(QColor(200, 90, 90));
+  painter->setBrush(MARKER_BRUSH);
+  painter->setPen(MARKER_PEN);
   painter->drawRect(QRect(m_currentFrame*8, 0, 8, rect.height()-2));
 
   // Draw first frame number (1)
@@ -103,5 +113,5 @@ void TimeLineHeader::updateCurrentFrame(const QPoint &pos)
 //  viewport()->repaint();
 
   setCurrentFrame((0.5 + pos.x() + offset() - sectionPosition(Joint::TimeLineColumn))/8);
-  emit currentFrameChanged(m_currentFrame);
+  emit currentFrameChangedByUser(m_currentFrame);
 }

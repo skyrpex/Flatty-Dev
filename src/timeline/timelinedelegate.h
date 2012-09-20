@@ -14,8 +14,11 @@ public:
   void setEditorData(QWidget *editor, const QModelIndex &index) const;
   QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
 
+public slots:
+  void setCurrentFrame(int frame);
+
 signals:
-  void currentFrameChanged(int frame);
+  void currentFrameChangedByUser(int frame);
 };
 
 #endif // KEYFRAMEDELEGATE_H

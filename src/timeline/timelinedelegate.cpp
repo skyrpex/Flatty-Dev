@@ -16,8 +16,8 @@ QWidget *TimeLineDelegate::createEditor(QWidget *parent, const QStyleOptionViewI
   if(qVariantCanConvert<Animation*>(index.data()))
   {
     TimeLineEditor *editor = new TimeLineEditor(parent);
-//    connect(editor, SIGNAL(currentFrameChanged(int)), this, SIGNAL(currentFrameChanged(int)));
-//    connect(this, SIGNAL(currentFrameChanged(int)), editor, SLOT(setCurrentFrame(int)));
+    connect(editor, SIGNAL(currentFrameChangedByUser(int)), this, SIGNAL(currentFrameChangedByUser(int)));
+    connect(this, SIGNAL(currentFrameChangedByUser(int)), editor, SLOT(setCurrentFrame(int)));
     return editor;
   }
 
@@ -40,4 +40,9 @@ QSize TimeLineDelegate::sizeHint(const QStyleOptionViewItem &option, const QMode
 {
   QSize size = QStyledItemDelegate::sizeHint(option, index);
   return QSize(size.width(), HEADER_HEIGHT);
+}
+
+void TimeLineDelegate::setCurrentFrame(int frame)
+{
+  emit currentFrameChangedByUser(frame);
 }

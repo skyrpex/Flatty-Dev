@@ -9,11 +9,13 @@ class TimeLineHeader : public QHeaderView
 public:
   explicit TimeLineHeader(QWidget *parent = 0);
 
+  int currentFrame() const;
+
 public slots:
   void setCurrentFrame(int frame);
 
 signals:
-  void currentFrameChanged(int frame);
+  void currentFrameChangedByUser(int frame);
 
 protected:
   void paintSection(QPainter *painter, const QRect &rect, int logicalIndex) const;

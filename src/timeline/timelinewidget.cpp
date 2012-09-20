@@ -58,6 +58,12 @@ TimeLineWidget::TimeLineWidget(QWidget *parent) :
           ui->treeWidget->verticalScrollBar(), SLOT(setValue(int)));
 
 
+  connect(m_header, SIGNAL(currentFrameChangedByUser(int)),
+          m_delegate, SIGNAL(currentFrameChangedByUser(int)));
+  connect(m_delegate, SIGNAL(currentFrameChangedByUser(int)),
+          m_header, SLOT(setCurrentFrame(int)));
+
+
   // Adding the root joint
   m_root = new Joint;
   m_root->setName("Root");
@@ -102,6 +108,7 @@ void TimeLineWidget::updateEditors()
   closeEditor(m_root);
   // Open them again...
   openEditor(m_root);
+  m_delegate->setCurrentFrame(m_header->currentFrame());
   // And finally, expand the root item once
   bool expanded = m_root->isExpanded();
   m_root->setExpanded(!expanded);
