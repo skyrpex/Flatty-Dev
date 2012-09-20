@@ -70,9 +70,6 @@ TimeLineWidget::TimeLineWidget(QWidget *parent) :
     joint = new Joint(joint);
     joint->setName(tr("Testing long names with Qt/C++/QtCreator/Qx/Qwt/Www %1").arg(i));
   }
-
-  // Open the editor for the skeleton
-  openEditor(m_root);
 }
 
 TimeLineWidget::~TimeLineWidget()
@@ -101,13 +98,14 @@ void TimeLineWidget::closeEditor(Joint *joint)
 
 void TimeLineWidget::updateEditors()
 {
-  // To correctly update the editors, we must close it
+  // To correctly update the header view, we must close the editors...
   closeEditor(m_root);
-  // Unset any previous animation
-  m_root->setAnimation(-1);
-  // Set the current animation
-  m_root->setAnimation(ui->comboBox->currentIndex());
+  // Open them again...
   openEditor(m_root);
+  // And finally, expand the root item once
+  bool expanded = m_root->isExpanded();
+  m_root->setExpanded(!expanded);
+  m_root->setExpanded(expanded);
 }
 
 void TimeLineWidget::on_addButton_clicked()
