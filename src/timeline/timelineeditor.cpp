@@ -6,11 +6,6 @@
 TimeLineEditor::TimeLineEditor(QWidget *parent) :
   QxTimeLineEditor(parent)
 {
-//  m_timeLine.insert(0, "Initial frame");
-//  m_timeLine.insert(5, "Keyframe 5");
-//  m_timeLine.insert(10, "Keyframe 10");
-//  m_timeLine.insert(88, "Keyframe 88");
-//  setKeyFrames(m_timeLine.keys());
 }
 
 void TimeLineEditor::setAnimation(Animation *animation)
