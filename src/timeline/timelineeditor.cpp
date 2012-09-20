@@ -48,6 +48,7 @@ void TimeLineEditor::contextMenuEvent(QContextMenuEvent *event)
 {
   // We want to keep the first frame
   int frame = frameAt(event->pos());
+
   if(frame > 0)
     QxTimeLineEditor::contextMenuEvent(event);
   setCurrentFrame(frame);
@@ -55,12 +56,16 @@ void TimeLineEditor::contextMenuEvent(QContextMenuEvent *event)
 
 void TimeLineEditor::mousePressEvent(QMouseEvent *event)
 {
-  // We want to keep the first frame
-  int frame = frameAt(event->pos());
-  if(frame > 0)
-    QxTimeLineEditor::mousePressEvent(event);
+  if(event->buttons() & Qt::LeftButton)
+  {
+    // We want to keep the first frame
+    int frame = frameAt(event->pos());
 
-  setCurrentFrame(frame);
+    if(frame > 0)
+      QxTimeLineEditor::mousePressEvent(event);
+
+    setCurrentFrame(frame);
+  }
 }
 
 void TimeLineEditor::mouseMoveEvent(QMouseEvent *event)
