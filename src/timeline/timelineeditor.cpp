@@ -3,6 +3,7 @@
 #include <QMouseEvent>
 #include <QDebug>
 //#include <QPen>
+#include <joint/joint.h>
 
 static const QPen LINE_PEN(QColor(250, 0, 0), 1);
 static const int LINE_OFFSET = 3;
@@ -48,10 +49,13 @@ void TimeLineEditor::contextMenuEvent(QContextMenuEvent *event)
 {
   // We want to keep the first frame
   int frame = frameAt(event->pos());
+  setCurrentFrame(frame);
 
   if(frame > 0)
+  {
     QxTimeLineEditor::contextMenuEvent(event);
-  setCurrentFrame(frame);
+    m_animation->joint()->setCurrentFrame(frame);
+  }
 }
 
 void TimeLineEditor::mousePressEvent(QMouseEvent *event)
@@ -61,10 +65,10 @@ void TimeLineEditor::mousePressEvent(QMouseEvent *event)
     // We want to keep the first frame
     int frame = frameAt(event->pos());
 
+    setCurrentFrame(frame);
+
     if(frame > 0)
       QxTimeLineEditor::mousePressEvent(event);
-
-    setCurrentFrame(frame);
   }
 }
 

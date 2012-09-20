@@ -3,7 +3,7 @@
 
 Joint::Joint(Joint *parent) :
   JointTreeItem(parent),
-  m_pose(new Animation)
+  m_pose(new Animation(this))
 {
 //  setText(0, QStrin);
 //  setData(NameColumn, Qt::DisplayRole, QString("Root"));
@@ -71,7 +71,7 @@ void Joint::setCurrentAnimationLength(int i)
 
 void Joint::createAnimation()
 {
-  m_animations << new Animation;
+  m_animations << new Animation(this);
   foreach(Joint *child, childJoints())
     child->createAnimation();
 }

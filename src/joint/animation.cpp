@@ -2,8 +2,9 @@
 
 const int Animation::s_defaultLength = 60;
 
-Animation::Animation()
-  : m_length(s_defaultLength)
+Animation::Animation(Joint *joint)
+  : m_joint(joint),
+    m_length(s_defaultLength)
 {
   insert(0, new FrameData);
 }
@@ -30,4 +31,9 @@ void Animation::setLength(int length)
     else
       ++it;
   }
+}
+
+Joint *Animation::joint() const
+{
+  return m_joint;
 }
