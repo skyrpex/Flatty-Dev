@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 //#include <QTreeWidget>
-//#include <joint/joint.h>
+#include <joint/joint.h>
 
 namespace Ui {
 class MainWindow;
@@ -20,7 +20,7 @@ public:
 private:
   Ui::MainWindow *ui;
 //  QTreeWidget *m_tree;
-//  Joint *m_rootJoint;
+  Joint *m_rootJoint;
 };
 
 #endif // MAINWINDOW_H

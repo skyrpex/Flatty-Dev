@@ -4,9 +4,9 @@
 
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent),
-  ui(new Ui::MainWindow)//,
+  ui(new Ui::MainWindow),
 //  m_tree(new QTreeWidget),
-//  m_rootJoint(new Joint)
+  m_rootJoint(new Joint)
 {
   ui->setupUi(this);
 
@@ -40,8 +40,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
   // Setup the view scenes
   ui->graphicsView->setScene(new QGraphicsScene(0, 0, 800, 600));
+  ui->graphicsView->setRenderHint(QPainter::Antialiasing);
   ui->modelView->setScene(new QGraphicsScene(0, 0, 800, 600));
   ui->modelView->scene()->addPixmap(QPixmap(":/icons/mesh.png"))->setFlag(QGraphicsItem::ItemIsMovable);
+
+  // Pass the root joint
+  m_rootJoint->setName("Root");
+  ui->timeLineWidget->setRootJoint(m_rootJoint);
+  ui->graphicsView->scene()->addItem(m_rootJoint);
 }
 
 MainWindow::~MainWindow()

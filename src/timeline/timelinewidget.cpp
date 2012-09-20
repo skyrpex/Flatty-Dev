@@ -65,17 +65,17 @@ TimeLineWidget::TimeLineWidget(QWidget *parent) :
 
 
   // Adding the root joint
-  m_root = new Joint;
-  m_root->setName("Root");
-  ui->treeWidget->addTopLevelItem(m_root);
+//  m_root = new Joint;
+//  m_root->setName("Root");
+//  ui->treeWidget->addTopLevelItem(m_root);
 
   // Adding text joints
-  Joint *joint = m_root;
-  for(int i = 0; i < 5; ++i)
-  {
-    joint = new Joint(joint);
-    joint->setName(tr("Testing long names with Qt/C++/QtCreator/Qx/Qwt/Www %1").arg(i));
-  }
+//  Joint *joint = m_root;
+//  for(int i = 0; i < 5; ++i)
+//  {
+//    joint = new Joint(joint);
+//    joint->setName(tr("Testing long names with Qt/C++/QtCreator/Qx/Qwt/Www %1").arg(i));
+//  }
 }
 
 TimeLineWidget::~TimeLineWidget()
@@ -86,6 +86,14 @@ TimeLineWidget::~TimeLineWidget()
 QAbstractItemModel *TimeLineWidget::model() const
 {
   return ui->treeWidget->model();
+}
+
+void TimeLineWidget::setRootJoint(Joint *joint)
+{
+//  m_root = new Joint;
+//  m_root->setName("Root");
+  m_root = joint;
+  ui->treeWidget->addTopLevelItem(m_root);
 }
 
 void TimeLineWidget::openEditor(Joint *joint)

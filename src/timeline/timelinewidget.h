@@ -20,6 +20,8 @@ public:
 
   QAbstractItemModel *model() const;
 
+  void setRootJoint(Joint *joint);
+
 public slots:
   void openEditor(Joint *joint);
   void closeEditor(Joint *joint);
