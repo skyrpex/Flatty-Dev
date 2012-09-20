@@ -20,7 +20,8 @@ SOURCES += \
     timeline/timelinewidget.cpp \
     timeline/timelineheader.cpp \
     timeline/timelinedelegate.cpp \
-    joint/keyframe.cpp
+    joint/keyframe.cpp \
+    mesh/meshwidget.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -32,11 +33,13 @@ HEADERS += \
     timeline/timelinewidget.h \
     timeline/timelineheader.h \
     timeline/timelinedelegate.h \
-    joint/keyframe.h
+    joint/keyframe.h \
+    mesh/meshwidget.h
 
 FORMS += \
     mainwindow.ui \
-    timeline/timelinewidget.ui
+    timeline/timelinewidget.ui \
+    mesh/meshwidget.ui
 
 RESOURCES += \
     resources/resource.qrc

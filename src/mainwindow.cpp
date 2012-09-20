@@ -31,6 +31,7 @@ MainWindow::MainWindow(QWidget *parent) :
   ui->timeLineSplitter->setStretchFactor(ui->timeLineSplitter->indexOf(ui->timeLineWidget), 1);
 
   ui->viewSplitter->setStretchFactor(ui->viewSplitter->indexOf(ui->modelView), 8);
+  ui->meshListSplitter->setStretchFactor(ui->meshListSplitter->indexOf(ui->meshWidget), 8);
 
   ui->animationListSplitter->setStretchFactor(ui->animationListSplitter->indexOf(ui->animationView), 8);
 

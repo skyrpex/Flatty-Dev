@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="modelTab">
        <attribute name="title">
@@ -26,32 +26,60 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Model name:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Unnamed model</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton">
+            <property name="text">
+             <string>Change</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
          <widget class="QSplitter" name="viewSplitter">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
-          <widget class="QSplitter" name="modelSplitter">
+          <widget class="QSplitter" name="meshListSplitter">
            <property name="orientation">
             <enum>Qt::Vertical</enum>
            </property>
-           <widget class="QListWidget" name="meshList">
-            <property name="iconSize">
-             <size>
-              <width>48</width>
-              <height>48</height>
-             </size>
-            </property>
-            <item>
-             <property name="text">
-              <string>A mesh</string>
-             </property>
-             <property name="icon">
-              <iconset resource="resources/resource.qrc">
-               <normaloff>:/icons/mesh.png</normaloff>:/icons/mesh.png</iconset>
-             </property>
-            </item>
-           </widget>
            <widget class="QTreeView" name="skeletonTree"/>
+           <widget class="MeshWidget" name="meshWidget" native="true"/>
           </widget>
           <widget class="QxGraphicsView" name="modelView"/>
          </widget>
@@ -120,9 +148,13 @@
    <extends>QGraphicsView</extends>
    <header location="global">QxGraphicsView</header>
   </customwidget>
+  <customwidget>
+   <class>MeshWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">mesh/meshwidget.h</header>
+   <container>1</container>
+  </customwidget>
  </customwidgets>
- <resources>
-  <include location="resources/resource.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
