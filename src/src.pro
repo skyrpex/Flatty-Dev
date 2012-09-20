@@ -37,3 +37,6 @@ HEADERS += \
 FORMS += \
     mainwindow.ui \
     timeline/timelinewidget.ui
+
+RESOURCES += \
+    resources/resource.qrc

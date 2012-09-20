@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>mesh.png</file>
+    </qresource>
+</RCC>

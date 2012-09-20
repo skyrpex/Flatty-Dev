@@ -37,6 +37,11 @@ MainWindow::MainWindow(QWidget *parent) :
   ui->skeletonTree->hideColumn(Joint::TimeLineColumn);
   ui->skeletonTree->header()->setResizeMode(QHeaderView::ResizeToContents);
   ui->skeletonTree->header()->setStretchLastSection(false);
+
+  // Setup the view scenes
+  ui->graphicsView->setScene(new QGraphicsScene(0, 0, 800, 600));
+  ui->modelView->setScene(new QGraphicsScene(0, 0, 800, 600));
+  ui->modelView->scene()->addPixmap(QPixmap(":/icons/mesh.png"))->setFlag(QGraphicsItem::ItemIsMovable);
 }
 
 MainWindow::~MainWindow()

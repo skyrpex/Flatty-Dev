@@ -34,10 +34,26 @@
            <property name="orientation">
             <enum>Qt::Vertical</enum>
            </property>
-           <widget class="QListWidget" name="meshList"/>
+           <widget class="QListWidget" name="meshList">
+            <property name="iconSize">
+             <size>
+              <width>48</width>
+              <height>48</height>
+             </size>
+            </property>
+            <item>
+             <property name="text">
+              <string>A mesh</string>
+             </property>
+             <property name="icon">
+              <iconset resource="resources/resource.qrc">
+               <normaloff>:/icons/mesh.png</normaloff>:/icons/mesh.png</iconset>
+             </property>
+            </item>
+           </widget>
            <widget class="QTreeView" name="skeletonTree"/>
           </widget>
-          <widget class="QGraphicsView" name="modelView"/>
+          <widget class="QxGraphicsView" name="modelView"/>
          </widget>
         </item>
        </layout>
@@ -53,7 +69,7 @@
            <enum>Qt::Vertical</enum>
           </property>
           <widget class="TimeLineWidget" name="timeLineWidget" native="true"/>
-          <widget class="QGraphicsView" name="graphicsView"/>
+          <widget class="QxGraphicsView" name="graphicsView"/>
          </widget>
         </item>
        </layout>
@@ -93,7 +109,14 @@
    <header location="global">timeline/timelinewidget.h</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>QxGraphicsView</class>
+   <extends>QGraphicsView</extends>
+   <header location="global">QxGraphicsView</header>
+  </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="resources/resource.qrc"/>
+ </resources>
  <connections/>
 </ui>
