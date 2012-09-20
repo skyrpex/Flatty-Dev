@@ -80,6 +80,11 @@ TimeLineWidget::~TimeLineWidget()
   delete ui;
 }
 
+QAbstractItemModel *TimeLineWidget::model() const
+{
+  return ui->treeWidget->model();
+}
+
 void TimeLineWidget::openEditor(Joint *joint)
 {
   ui->treeWidget->openPersistentEditor(joint, JointTreeItem::TimeLineColumn);

@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent),
@@ -29,7 +30,13 @@ MainWindow::MainWindow(QWidget *parent) :
   ui->splitter->setStretchFactor(ui->splitter->indexOf(ui->timeLineWidget), 1);
   ui->splitter->setStretchFactor(ui->splitter->indexOf(ui->graphicsView), 8);
 
+  ui->viewSplitter->setStretchFactor(ui->viewSplitter->indexOf(ui->modelView), 8);
 
+  // Setup the skeleton tree
+  ui->skeletonTree->setModel(ui->timeLineWidget->model());
+  ui->skeletonTree->hideColumn(Joint::TimeLineColumn);
+  ui->skeletonTree->header()->setResizeMode(QHeaderView::ResizeToContents);
+  ui->skeletonTree->header()->setStretchLastSection(false);
 }
 
 MainWindow::~MainWindow()

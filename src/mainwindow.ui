@@ -18,12 +18,29 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="modelTab">
        <attribute name="title">
         <string>Model</string>
        </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QSplitter" name="viewSplitter">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <widget class="QSplitter" name="modelSplitter">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <widget class="QListWidget" name="meshList"/>
+           <widget class="QTreeView" name="skeletonTree"/>
+          </widget>
+          <widget class="QGraphicsView" name="modelView"/>
+         </widget>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="animationTab">
        <attribute name="title">

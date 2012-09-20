@@ -18,6 +18,8 @@ public:
   explicit TimeLineWidget(QWidget *parent = 0);
   ~TimeLineWidget();
 
+  QAbstractItemModel *model() const;
+
 public slots:
   void openEditor(Joint *joint);
   void closeEditor(Joint *joint);
