@@ -126,6 +126,9 @@ void TimeLineWidget::updateEditors()
   bool expanded = m_root->isExpanded();
   m_root->setExpanded(!expanded);
   m_root->setExpanded(expanded);
+
+  // Make sure the header time marker is also reseted
+  m_header->setCurrentFrame(0);
 }
 
 void TimeLineWidget::on_addButton_clicked()
