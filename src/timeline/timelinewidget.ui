@@ -17,6 +17,13 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Animation:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QComboBox" name="comboBox">
        <property name="enabled">
         <bool>false</bool>
@@ -26,7 +33,7 @@
      <item>
       <widget class="QPushButton" name="addButton">
        <property name="text">
-        <string>Add animation</string>
+        <string>Add</string>
        </property>
       </widget>
      </item>
@@ -36,7 +43,7 @@
         <bool>false</bool>
        </property>
        <property name="text">
-        <string>Remove animation</string>
+        <string>Remove</string>
        </property>
       </widget>
      </item>

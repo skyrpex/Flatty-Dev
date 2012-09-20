@@ -27,7 +27,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
   // Set stretch factors
   ui->splitter->setStretchFactor(ui->splitter->indexOf(ui->timeLineWidget), 1);
-  ui->splitter->setStretchFactor(ui->splitter->indexOf(ui->graphicsView), 3);
+  ui->splitter->setStretchFactor(ui->splitter->indexOf(ui->graphicsView), 8);
 
 
 }
