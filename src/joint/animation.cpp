@@ -6,12 +6,12 @@ Animation::Animation(Joint *joint)
   : m_joint(joint),
     m_length(s_defaultLength)
 {
-  insert(0, new FrameData);
+  insert(0, new KeyFrame);
 }
 
-FrameData Animation::displayFrameData(int i) const
+KeyFrame Animation::displayFrameData(int i) const
 {
-  return FrameData();
+  return KeyFrame();
 }
 
 int Animation::length() const

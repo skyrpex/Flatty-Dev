@@ -4,17 +4,17 @@
 #include <QObject>
 #include <QMetaType>
 #include <QMap>
-#include <joint/framedata.h>
+#include <joint/keyframe.h>
 
 class Joint;
 
-class Animation : public QObject, public QMap<int, FrameData*>
+class Animation : public QObject, public QMap<int, KeyFrame*>
 {
   Q_OBJECT
 public:
   Animation(Joint *joint);
 
-  FrameData displayFrameData(int i) const;
+  KeyFrame displayFrameData(int i) const;
 
   int length() const;
   void setLength(int length);

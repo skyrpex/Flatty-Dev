@@ -19,7 +19,7 @@ JointGraphicsItem::JointGraphicsItem()
   setEnabled(false);
 }
 
-void JointGraphicsItem::setCurrentFrameData(FrameData *frameData)
+void JointGraphicsItem::setCurrentFrameData(KeyFrame *frameData)
 {
   m_frameData = frameData;
 
@@ -29,12 +29,12 @@ void JointGraphicsItem::setCurrentFrameData(FrameData *frameData)
   setEnabled(m_frameData);
 }
 
-FrameData *JointGraphicsItem::currentFrameData() const
+KeyFrame *JointGraphicsItem::currentFrameData() const
 {
   return m_frameData;
 }
 
-void JointGraphicsItem::setCurrentDisplayFrameData(const FrameData &frameData)
+void JointGraphicsItem::setCurrentDisplayFrameData(const KeyFrame &frameData)
 {
   m_frameData = NULL;
   m_displayFrameData = frameData;
@@ -42,7 +42,7 @@ void JointGraphicsItem::setCurrentDisplayFrameData(const FrameData &frameData)
   setEnabled(false);
 }
 
-FrameData JointGraphicsItem::currentDisplayFrameData() const
+KeyFrame JointGraphicsItem::currentDisplayFrameData() const
 {
   return m_displayFrameData;
 }

@@ -80,7 +80,7 @@ void TimeLineEditor::mouseMoveEvent(QMouseEvent *event)
 
 bool TimeLineEditor::addKeyFrame(int frame)
 {
-  m_animation->insert(frame, new FrameData);
+  m_animation->insert(frame, new KeyFrame);
   return true;
 }
 
@@ -92,11 +92,11 @@ bool TimeLineEditor::removeKeyFrame(int frame)
 
 bool TimeLineEditor::replaceKeyFrame(int from, int to)
 {
-  QMap<int, FrameData*>::Iterator it = m_animation->find(to);
+  QMap<int, KeyFrame*>::Iterator it = m_animation->find(to);
   if(it != m_animation->end())
     delete m_animation->take(to);
 
-  FrameData *keyFrame = m_animation->take(from);
+  KeyFrame *keyFrame = m_animation->take(from);
   m_animation->insert(to, keyFrame);
   return true;
 }

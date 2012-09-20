@@ -16,11 +16,11 @@ SOURCES += \
     joint/jointtreeitem.cpp \
     joint/jointgraphicsitem.cpp \
     joint/joint.cpp \
-    joint/framedata.cpp \
     joint/animation.cpp \
     timeline/timelinewidget.cpp \
     timeline/timelineheader.cpp \
-    timeline/timelinedelegate.cpp
+    timeline/timelinedelegate.cpp \
+    joint/keyframe.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -28,11 +28,11 @@ HEADERS += \
     joint/jointtreeitem.h \
     joint/jointgraphicsitem.h \
     joint/joint.h \
-    joint/framedata.h \
     joint/animation.h \
     timeline/timelinewidget.h \
     timeline/timelineheader.h \
-    timeline/timelinedelegate.h
+    timeline/timelinedelegate.h \
+    joint/keyframe.h
 
 FORMS += \
     mainwindow.ui \

@@ -27,10 +27,12 @@ MainWindow::MainWindow(QWidget *parent) :
 //          m_rootJoint, SLOT(setAnimationLength(int)));
 
   // Set stretch factors
-  ui->splitter->setStretchFactor(ui->splitter->indexOf(ui->timeLineWidget), 1);
-  ui->splitter->setStretchFactor(ui->splitter->indexOf(ui->graphicsView), 8);
+  ui->timeLineSplitter->setStretchFactor(ui->timeLineSplitter->indexOf(ui->animationListSplitter), 8);
+  ui->timeLineSplitter->setStretchFactor(ui->timeLineSplitter->indexOf(ui->timeLineWidget), 1);
 
   ui->viewSplitter->setStretchFactor(ui->viewSplitter->indexOf(ui->modelView), 8);
+
+  ui->animationListSplitter->setStretchFactor(ui->animationListSplitter->indexOf(ui->animationView), 8);
 
   // Setup the skeleton tree
   ui->skeletonTree->setModel(ui->timeLineWidget->model());
@@ -39,15 +41,15 @@ MainWindow::MainWindow(QWidget *parent) :
   ui->skeletonTree->header()->setStretchLastSection(false);
 
   // Setup the view scenes
-  ui->graphicsView->setScene(new QGraphicsScene(0, 0, 800, 600));
-  ui->graphicsView->setRenderHint(QPainter::Antialiasing);
+  ui->animationView->setScene(new QGraphicsScene(0, 0, 800, 600));
+  ui->animationView->setRenderHint(QPainter::Antialiasing);
   ui->modelView->setScene(new QGraphicsScene(0, 0, 800, 600));
   ui->modelView->scene()->addPixmap(QPixmap(":/icons/mesh.png"))->setFlag(QGraphicsItem::ItemIsMovable);
 
   // Pass the root joint
   m_rootJoint->setName("Root");
   ui->timeLineWidget->setRootJoint(m_rootJoint);
-  ui->graphicsView->scene()->addItem(m_rootJoint);
+  ui->animationView->scene()->addItem(m_rootJoint);
 }
 
 MainWindow::~MainWindow()

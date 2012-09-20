@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="modelTab">
        <attribute name="title">
@@ -64,12 +64,18 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QSplitter" name="splitter">
+         <widget class="QSplitter" name="timeLineSplitter">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
           <widget class="TimeLineWidget" name="timeLineWidget" native="true"/>
-          <widget class="QxGraphicsView" name="graphicsView"/>
+          <widget class="QSplitter" name="animationListSplitter">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <widget class="QListWidget" name="animationList"/>
+           <widget class="QxGraphicsView" name="animationView"/>
+          </widget>
          </widget>
         </item>
        </layout>

@@ -2,22 +2,22 @@
 #define JOINTGRAPHICSITEM_H
 
 #include <QGraphicsEllipseItem>
-#include <joint/framedata.h>
+#include <joint/keyframe.h>
 
 class JointGraphicsItem : public QGraphicsEllipseItem
 {
 public:
   JointGraphicsItem();
 
-  void setCurrentFrameData(FrameData *currentFrameData);
-  FrameData *currentFrameData() const;
+  void setCurrentFrameData(KeyFrame *currentFrameData);
+  KeyFrame *currentFrameData() const;
 
-  void setCurrentDisplayFrameData(const FrameData &currentFrameData);
-  FrameData currentDisplayFrameData() const;
+  void setCurrentDisplayFrameData(const KeyFrame &currentFrameData);
+  KeyFrame currentDisplayFrameData() const;
 
 private:
-  FrameData *m_frameData;
-  FrameData m_displayFrameData;
+  KeyFrame *m_frameData;
+  KeyFrame m_displayFrameData;
 };
 
 #endif // JOINTGRAPHICSITEM_H

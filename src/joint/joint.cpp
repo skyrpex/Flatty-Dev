@@ -49,7 +49,7 @@ void Joint::setCurrentFrame(int i)
   Animation *anim = currentAnimation();
   Q_ASSERT(anim);
 
-  FrameData *frameData = anim->value(i, NULL);
+  KeyFrame *frameData = anim->value(i, NULL);
   if(frameData)
     setCurrentFrameData(frameData);
   else
