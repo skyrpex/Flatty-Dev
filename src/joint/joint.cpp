@@ -62,7 +62,6 @@ void Joint::setCurrentFrame(int i)
 
 void Joint::setPoseMode()
 {
-  qDebug() << __FUNCTION__;
   JointTreeItem::setCurrentAnimation(m_pose);
   setCurrentFrame(0);
 }

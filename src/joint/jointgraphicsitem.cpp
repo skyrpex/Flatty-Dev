@@ -42,8 +42,6 @@ KeyFrame *JointGraphicsItem::currentKeyFrame() const
 
 void JointGraphicsItem::setCurrentDisplayKeyFrame(const KeyFrame &frameData)
 {
-  qDebug() << __FUNCTION__;
-
   m_keyFrame = NULL;
   m_displayKeyFrame = frameData;
 
