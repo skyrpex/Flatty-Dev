@@ -37,7 +37,8 @@ void TimeLineEditor::setAnimation(Animation *animation)
 
 void TimeLineEditor::setCurrentFrame(int frame)
 {
-  if(m_currentFrame != frame)
+  Q_ASSERT(m_animation);
+  if(m_currentFrame != frame &&frame >= 0 && frame < m_animation->length())
   {
     m_currentFrame = frame;
     emit currentFrameChanged(frame);
@@ -67,6 +68,7 @@ void TimeLineEditor::mousePressEvent(QMouseEvent *event)
 
     setCurrentFrame(frame);
 
+//    qBound(0, frame, m_animation->length())
     if(frame > 0)
       QxTimeLineEditor::mousePressEvent(event);
   }
