@@ -5,6 +5,7 @@
 #include <QMetaType>
 #include <QMap>
 #include <joint/keyframe.h>
+#include <QPair>
 
 class Joint;
 
@@ -14,7 +15,7 @@ class Animation : public QObject, public QMap<int, KeyFrame*>
 public:
   Animation(Joint *joint);
 
-  KeyFrame displayFrameData(int i) const;
+  KeyFrame displayFrameData(int frame) const;
 
   int length() const;
   void setLength(int length);
@@ -22,9 +23,13 @@ public:
   Joint *joint() const;
 
 private:
+  ConstIterator iteratorNextTo(int frame) const;
+  QPair<ConstIterator, ConstIterator> iteratorsAround(int frame) const;
+
   Joint *m_joint;
   static const int s_defaultLength;
   int m_length;
+  bool m_isLoop;
 };
 
 Q_DECLARE_METATYPE(Animation*)
