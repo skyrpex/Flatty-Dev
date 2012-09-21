@@ -18,24 +18,6 @@
     <number>0</number>
    </property>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QPushButton" name="importButton">
-       <property name="text">
-        <string>Import mesh</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="removeButton">
-       <property name="text">
-        <string>Remove mesh</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
     <widget class="QListWidget" name="meshList">
      <property name="iconSize">
       <size>
@@ -53,6 +35,24 @@
       </property>
      </item>
     </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="importButton">
+       <property name="text">
+        <string>Import mesh</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="removeButton">
+       <property name="text">
+        <string>Remove mesh</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>
