@@ -42,9 +42,10 @@ MainWindow::MainWindow(QWidget *parent) :
   ui->skeletonTree->header()->setStretchLastSection(false);
 
   // Setup the view scenes
-  ui->animationView->setScene(new QGraphicsScene(0, 0, 800, 600));
+  ui->animationView->setScene(new QGraphicsScene);
   ui->animationView->setRenderHint(QPainter::Antialiasing);
-  ui->modelView->setScene(new QGraphicsScene(0, 0, 800, 600));
+  ui->modelView->setScene(new QGraphicsScene);
+  ui->modelView->setRenderHint(QPainter::Antialiasing);
   ui->modelView->scene()->addPixmap(QPixmap(":/icons/mesh.png"))->setFlag(QGraphicsItem::ItemIsMovable);
 
   // Pass the root joint
