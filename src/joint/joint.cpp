@@ -45,12 +45,16 @@ void Joint::setCurrentAnimation(int i)
 void Joint::setCurrentFrame(int i)
 {
   Animation *anim = currentAnimation();
-
-  KeyFrame *frameData = anim? anim->value(i, NULL) : NULL;
-  if(frameData)
-    setCurrentKeyFrame(frameData);
+  if(anim)
+  {
+    KeyFrame *frameData = anim->value(i, NULL);
+    if(frameData)
+      setCurrentKeyFrame(frameData);
+    else
+      setCurrentDisplayKeyFrame(anim->displayFrameData(i));
+  }
   else
-    setCurrentDisplayKeyFrame(anim->displayFrameData(i));
+    setCurrentKeyFrame(NULL);
 
   foreach(Joint *child, childJoints())
     child->setCurrentFrame(i);
