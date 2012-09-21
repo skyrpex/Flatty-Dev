@@ -21,7 +21,8 @@ SOURCES += \
     timeline/timelineheader.cpp \
     timeline/timelinedelegate.cpp \
     joint/keyframe.cpp \
-    mesh/meshwidget.cpp
+    mesh/meshwidget.cpp \
+    mathhelper.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -34,7 +35,8 @@ HEADERS += \
     timeline/timelineheader.h \
     timeline/timelinedelegate.h \
     joint/keyframe.h \
-    mesh/meshwidget.h
+    mesh/meshwidget.h \
+    mathhelper.h
 
 FORMS += \
     mainwindow.ui \
