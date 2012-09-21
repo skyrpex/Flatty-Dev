@@ -22,6 +22,8 @@ public:
 
   void setRootJoint(Joint *joint);
 
+  int currentAnimation() const;
+
 public slots:
   void openEditor(Joint *joint);
   void closeEditor(Joint *joint);

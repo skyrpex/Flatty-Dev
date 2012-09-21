@@ -22,6 +22,8 @@ public slots:
   void setCurrentAnimationLength(int i);
   void setCurrentFrame(int i);
 
+  void setPoseMode();
+
 private:
   QList<Animation*> m_animations;
   Animation *m_pose;

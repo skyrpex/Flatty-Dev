@@ -38,6 +38,7 @@ QList<JointTreeItem *> JointTreeItem::childItems() const
 
 void JointTreeItem::setCurrentAnimation(Animation *animation)
 {
+  qDebug() << __FUNCTION__ << (ulong)animation;
   setData(TimeLineColumn, Qt::DisplayRole,
           QVariant::fromValue<Animation*>(animation));
 }

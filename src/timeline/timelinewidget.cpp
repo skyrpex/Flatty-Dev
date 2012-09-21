@@ -100,6 +100,11 @@ void TimeLineWidget::setRootJoint(Joint *joint)
           m_root, SLOT(setCurrentFrame(int)));
 }
 
+int TimeLineWidget::currentAnimation() const
+{
+  return ui->comboBox->currentIndex();
+}
+
 void TimeLineWidget::openEditor(Joint *joint)
 {
   ui->treeWidget->openPersistentEditor(joint, JointTreeItem::TimeLineColumn);

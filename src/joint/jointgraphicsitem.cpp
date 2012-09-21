@@ -2,6 +2,7 @@
 #include <QBrush>
 #include <QPen>
 #include <QDebug>
+#include <QGraphicsSceneMouseEvent>
 
 static const int HALF_WIDTH = 10;
 static const QBrush JOINT_BRUSH(Qt::white);
@@ -9,7 +10,7 @@ static const QPen JOINT_PEN(Qt::black, 3);
 
 JointGraphicsItem::JointGraphicsItem()
   : QGraphicsEllipseItem(-HALF_WIDTH, -HALF_WIDTH, HALF_WIDTH*2, HALF_WIDTH*2)
-  , m_frameData(NULL)
+  , m_keyFrame(NULL)
 {
   setBrush(JOINT_BRUSH);
   setPen(JOINT_PEN);
@@ -19,30 +20,50 @@ JointGraphicsItem::JointGraphicsItem()
   setEnabled(false);
 }
 
-void JointGraphicsItem::setCurrentFrameData(KeyFrame *frameData)
+void JointGraphicsItem::setCurrentKeyFrame(KeyFrame *keyFrame)
 {
-  m_frameData = frameData;
+  qDebug() << __FUNCTION__ << (ulong)keyFrame;
+  m_keyFrame = keyFrame;
 
-  if(m_frameData)
-    m_displayFrameData = *m_frameData;
+  if(m_keyFrame)
+    m_displayKeyFrame = *m_keyFrame;
+  else
+    m_displayKeyFrame = KeyFrame();
 
-  setEnabled(m_frameData);
+  setPos(m_displayKeyFrame.rotation, m_displayKeyFrame.scale);
+
+  setEnabled(m_keyFrame);
 }
 
-KeyFrame *JointGraphicsItem::currentFrameData() const
+KeyFrame *JointGraphicsItem::currentKeyFrame() const
 {
-  return m_frameData;
+  return m_keyFrame;
 }
 
-void JointGraphicsItem::setCurrentDisplayFrameData(const KeyFrame &frameData)
+void JointGraphicsItem::setCurrentDisplayKeyFrame(const KeyFrame &frameData)
 {
-  m_frameData = NULL;
-  m_displayFrameData = frameData;
+  qDebug() << __FUNCTION__;
+
+  m_keyFrame = NULL;
+  m_displayKeyFrame = frameData;
+
+  setPos(m_displayKeyFrame.rotation, m_displayKeyFrame.scale);
 
   setEnabled(false);
 }
 
-KeyFrame JointGraphicsItem::currentDisplayFrameData() const
+KeyFrame JointGraphicsItem::currentDisplayKeyFrame() const
 {
-  return m_displayFrameData;
+  return m_displayKeyFrame;
+}
+
+void JointGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+  QGraphicsEllipseItem::mouseMoveEvent(event);
+
+  if(m_keyFrame)
+  {
+    m_keyFrame->rotation = x();
+    m_keyFrame->scale = y();
+  }
 }

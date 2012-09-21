@@ -9,15 +9,18 @@ class JointGraphicsItem : public QGraphicsEllipseItem
 public:
   JointGraphicsItem();
 
-  void setCurrentFrameData(KeyFrame *currentFrameData);
-  KeyFrame *currentFrameData() const;
+  void setCurrentKeyFrame(KeyFrame *keyFrame);
+  KeyFrame *currentKeyFrame() const;
 
-  void setCurrentDisplayFrameData(const KeyFrame &currentFrameData);
-  KeyFrame currentDisplayFrameData() const;
+  void setCurrentDisplayKeyFrame(const KeyFrame &currentKeyFrame);
+  KeyFrame currentDisplayKeyFrame() const;
+
+protected:
+  void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
 
 private:
-  KeyFrame *m_frameData;
-  KeyFrame m_displayFrameData;
+  KeyFrame *m_keyFrame;
+  KeyFrame m_displayKeyFrame;
 };
 
 #endif // JOINTGRAPHICSITEM_H

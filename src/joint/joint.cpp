@@ -33,12 +33,10 @@ QList<Joint *> Joint::childJoints() const
 void Joint::setCurrentAnimation(int i)
 {
   if(i != -1)
-  {
     JointTreeItem::setCurrentAnimation(m_animations.at(i));
-    setCurrentFrame(0);
-  }
   else
     JointTreeItem::setCurrentAnimation(NULL);
+  setCurrentFrame(0);
 
   foreach(Joint *child, childJoints())
     child->setCurrentAnimation(i);
@@ -47,16 +45,22 @@ void Joint::setCurrentAnimation(int i)
 void Joint::setCurrentFrame(int i)
 {
   Animation *anim = currentAnimation();
-  Q_ASSERT(anim);
 
-  KeyFrame *frameData = anim->value(i, NULL);
+  KeyFrame *frameData = anim? anim->value(i, NULL) : NULL;
   if(frameData)
-    setCurrentFrameData(frameData);
+    setCurrentKeyFrame(frameData);
   else
-    setCurrentDisplayFrameData(anim->displayFrameData(i));
+    setCurrentDisplayKeyFrame(anim->displayFrameData(i));
 
   foreach(Joint *child, childJoints())
     child->setCurrentFrame(i);
+}
+
+void Joint::setPoseMode()
+{
+  qDebug() << __FUNCTION__;
+  JointTreeItem::setCurrentAnimation(m_pose);
+  setCurrentFrame(0);
 }
 
 void Joint::setCurrentAnimationLength(int i)

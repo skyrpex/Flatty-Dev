@@ -50,11 +50,28 @@ MainWindow::MainWindow(QWidget *parent) :
   // Pass the root joint
   m_rootJoint->setName("Root");
   ui->timeLineWidget->setRootJoint(m_rootJoint);
-  ui->animationView->scene()->addItem(m_rootJoint);
+
+  // Set the root joint to the default scene
+//  ui->modelView->scene()->addItem(m_rootJoint);
+  on_tabWidget_currentChanged(ui->tabWidget->currentWidget());
 }
 
 MainWindow::~MainWindow()
 {
   delete ui;
 //  delete m_tree;
+}
+
+void MainWindow::on_tabWidget_currentChanged(QWidget *arg1)
+{
+  if(arg1 == ui->modelTab)
+  {
+    m_rootJoint->setPoseMode();
+    ui->modelView->scene()->addItem(m_rootJoint);
+  }
+  else
+  {
+    m_rootJoint->setCurrentAnimation(ui->timeLineWidget->currentAnimation());
+    ui->animationView->scene()->addItem(m_rootJoint);
+  }
 }
