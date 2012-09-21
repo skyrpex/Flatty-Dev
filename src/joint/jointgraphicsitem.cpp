@@ -22,7 +22,6 @@ JointGraphicsItem::JointGraphicsItem()
 
 void JointGraphicsItem::setCurrentKeyFrame(KeyFrame *keyFrame)
 {
-  qDebug() << __FUNCTION__ << (ulong)keyFrame;
   m_keyFrame = keyFrame;
 
   if(m_keyFrame)

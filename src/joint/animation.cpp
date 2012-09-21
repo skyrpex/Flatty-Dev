@@ -1,5 +1,6 @@
 #include "animation.h"
 #include <QDebug>
+#include <mathhelper.h>
 
 const int Animation::s_defaultLength = 60;
 
@@ -14,27 +15,30 @@ Animation::Animation(Joint *joint)
 KeyFrame Animation::displayFrameData(int frame) const
 {
   QPair<ConstIterator, ConstIterator> iterators = iteratorsAround(frame);
+  ConstIterator a = previous(iterators.first);
+  ConstIterator b = iterators.first;
+  ConstIterator c = iterators.second;
+  ConstIterator d = next(iterators.second);
 
-  int previousFrame = iterators.first.key();
-  int nextFrame = iterators.second.key();
+  int previousFrame = b.key();
+  int nextFrame = c.key();
+  if(nextFrame-previousFrame == 0)
+    return *b.value();
+
   if(nextFrame < previousFrame)
     nextFrame += length();
-
-  // The code messes up here
-  KeyFrame *previous = iterators.first.value();
-  KeyFrame *next = iterators.second.value();
-  qDebug() << "Frames" << previousFrame << ">" << frame << ">" << nextFrame;
-  qDebug() << "Iterators" << iterators.first.key() << iterators.second.key();
-  Q_ASSERT(previous && next);
-
-  if(nextFrame-previousFrame == 0)
-    return *previous;
 
   qreal p = qreal(frame-previousFrame)/qreal(nextFrame-previousFrame);
 
   KeyFrame keyFrame;
-  keyFrame.rotation = previous->rotation + p*(next->rotation-previous->rotation);
-  keyFrame.scale = previous->scale + p*(next->scale-previous->scale);
+  keyFrame.rotation = Math::catmullRomInterpolation(a.value()->rotation, b.value()->rotation,
+                                                    c.value()->rotation, d.value()->rotation,
+                                                    a.key(), b.key(), c.key(), d.key(),
+                                                    p);
+  keyFrame.scale = Math::catmullRomInterpolation(a.value()->scale, b.value()->scale,
+                                                 c.value()->scale, d.value()->scale,
+                                                 a.key(), b.key(), c.key(), d.key(),
+                                                 p);
   return keyFrame;
 }
 
