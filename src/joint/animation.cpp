@@ -20,19 +20,17 @@ KeyFrame Animation::displayFrameData(int frame) const
   if(nextFrame < previousFrame)
     nextFrame += length();
 
-  if(nextFrame-previousFrame == 0)
-    return KeyFrame();
-
-
-  qreal p = qreal(frame-previousFrame)/qreal(nextFrame-previousFrame);
-
   // The code messes up here
   KeyFrame *previous = iterators.first.value();
   KeyFrame *next = iterators.second.value();
-  qDebug() << "Frames" << previousFrame << frame << nextFrame;
+  qDebug() << "Frames" << previousFrame << ">" << frame << ">" << nextFrame;
   qDebug() << "Iterators" << iterators.first.key() << iterators.second.key();
-  qDebug() << "Data" << (ulong)previous << (ulong)next;
   Q_ASSERT(previous && next);
+
+  if(nextFrame-previousFrame == 0)
+    return *previous;
+
+  qreal p = qreal(frame-previousFrame)/qreal(nextFrame-previousFrame);
 
   KeyFrame keyFrame;
   keyFrame.rotation = previous->rotation + p*(next->rotation-previous->rotation);
@@ -85,8 +83,31 @@ QPair<Animation::ConstIterator, Animation::ConstIterator> Animation::iteratorsAr
 {
   ConstIterator next = iteratorNextTo(frame);
 
-  if(next == begin())
-    return QPair<ConstIterator, ConstIterator>(m_isLoop? end()-1 : begin(), next);
+  ConstIterator previous;
+  if(next.key() < frame && !m_isLoop)
+    previous = next;
+  else
+    previous = this->previous(next);
 
-  return QPair<ConstIterator, ConstIterator>(next-1, next);
+  return QPair<ConstIterator, ConstIterator>(previous, next);
+}
+
+Animation::ConstIterator Animation::next(ConstIterator it) const
+{
+  Q_ASSERT(it != end());
+
+  if(it+1 == end())
+    return m_isLoop? begin() : it;
+
+  return it+1;
+}
+
+Animation::ConstIterator Animation::previous(ConstIterator it) const
+{
+  Q_ASSERT(it != end());
+
+  if(it == begin())
+    return m_isLoop? end()-1 : begin();
+
+  return it-1;
 }

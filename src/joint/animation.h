@@ -26,6 +26,9 @@ private:
   ConstIterator iteratorNextTo(int frame) const;
   QPair<ConstIterator, ConstIterator> iteratorsAround(int frame) const;
 
+  ConstIterator next(ConstIterator it) const;
+  ConstIterator previous(ConstIterator it) const;
+
   Joint *m_joint;
   static const int s_defaultLength;
   int m_length;
