@@ -8,8 +8,12 @@ class Math
 public:
   static qreal modulo(qreal a, qreal b);
   static qreal angleDifference(qreal a, qreal b);
+  static qreal normalizedAngle(qreal angle);
+  static qreal fullAngle(qreal angle);
+  static qreal halfAngle(qreal angle);
   template<class T>
-  static inline T catmullRomInterpolation(const T &a, const T &b, const T &c, const T &d, qreal ta, qreal tb, qreal tc, qreal td, qreal u)
+  static inline T catmullRomInterpolation(const T &a, const T &b, const T &c, const T &d,
+                                          qreal ta, qreal tb, qreal tc, qreal td, qreal u)
   {
     qreal u2 = u*u;
     qreal u3 = u2*u;
