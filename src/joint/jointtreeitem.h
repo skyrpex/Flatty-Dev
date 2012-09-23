@@ -2,7 +2,7 @@
 #define JOINTTREEITEM_H
 
 #include <QTreeWidgetItem>
-#include <joint/animation.h>
+#include <animation/animation.h>
 
 class JointTreeItem : public QTreeWidgetItem
 {

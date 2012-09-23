@@ -1,7 +1,7 @@
 #include "timelinedelegate.h"
 #include <timeline/timelineeditor.h>
 #include <QDebug>
-#include <joint/animation.h>
+#include <animation/animation.h>
 
 static const int HEADER_HEIGHT = 20;
 

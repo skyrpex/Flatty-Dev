@@ -4,7 +4,7 @@
 #include <QxTimeLineEditor>
 #include <QMap>
 #include <QString>
-#include <joint/animation.h>
+#include <animation/animation.h>
 #include <QGraphicsLineItem>
 
 class TimeLineEditor : public QxTimeLineEditor

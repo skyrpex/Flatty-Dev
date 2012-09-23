@@ -2,7 +2,7 @@
 #define JOINTGRAPHICSITEM_H
 
 #include <QGraphicsEllipseItem>
-#include <joint/keyframe.h>
+#include <animation/keyframe.h>
 
 class JointGraphicsItem : public QGraphicsEllipseItem
 {

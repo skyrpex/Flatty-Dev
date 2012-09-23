@@ -16,11 +16,11 @@ SOURCES += \
     joint/jointtreeitem.cpp \
     joint/jointgraphicsitem.cpp \
     joint/joint.cpp \
-    joint/animation.cpp \
+    animation/animation.cpp \
     timeline/timelinewidget.cpp \
     timeline/timelineheader.cpp \
     timeline/timelinedelegate.cpp \
-    joint/keyframe.cpp \
+    animation/keyframe.cpp \
     mesh/meshwidget.cpp \
     mathhelper.cpp
 
@@ -30,11 +30,11 @@ HEADERS += \
     joint/jointtreeitem.h \
     joint/jointgraphicsitem.h \
     joint/joint.h \
-    joint/animation.h \
+    animation/animation.h \
     timeline/timelinewidget.h \
     timeline/timelineheader.h \
     timeline/timelinedelegate.h \
-    joint/keyframe.h \
+    animation/keyframe.h \
     mesh/meshwidget.h \
     mathhelper.h
 

@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QMetaType>
 #include <QMap>
-#include <joint/keyframe.h>
+#include <animation/keyframe.h>
 #include <QPair>
 
 class Joint;
