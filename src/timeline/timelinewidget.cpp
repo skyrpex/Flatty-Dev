@@ -2,6 +2,7 @@
 #include "ui_timelinewidget.h"
 #include <QScrollBar>
 #include <QInputDialog>
+#include <QDebug>
 
 static const char* FramesButtonTextSingular = "1 frame";
 static const char* FramesButtonText = "%1 frames";
@@ -12,7 +13,8 @@ TimeLineWidget::TimeLineWidget(QWidget *parent) :
   ui(new Ui::TimeLineWidget),
   m_header(new TimeLineHeader),
   m_delegate(new TimeLineDelegate),
-  m_root(NULL)
+  m_root(NULL),
+  m_currentTime(0)
 {
   ui->setupUi(this);
 
@@ -66,6 +68,9 @@ TimeLineWidget::TimeLineWidget(QWidget *parent) :
   connect(m_delegate, SIGNAL(currentFrameChanged(int)),
           m_header, SLOT(setCurrentFrame(int)));
 
+  connect(this, SIGNAL(currentFrameChanged(int)),
+          m_header, SLOT(setCurrentFrame(int)));
+
 
   // Adding the root joint
 //  m_root = new Joint;
@@ -79,6 +84,9 @@ TimeLineWidget::TimeLineWidget(QWidget *parent) :
 //    joint = new Joint(joint);
 //    joint->setName(tr("Testing long names with Qt/C++/QtCreator/Qx/Qwt/Www %1").arg(i));
 //  }
+
+  connect(&m_timer, SIGNAL(timeout()),
+          this, SLOT(advanceFrame()));
 }
 
 TimeLineWidget::~TimeLineWidget()
@@ -139,6 +147,21 @@ void TimeLineWidget::updateEditors()
   m_header->setCurrentFrame(0);
 }
 
+void TimeLineWidget::advanceFrame()
+{
+  ++m_currentTime;
+
+  if(m_root->currentAnimation()->isLoop())
+    m_currentTime = m_currentTime%m_root->currentAnimation()->length();
+  else if(m_currentTime >= m_root->currentAnimation()->length())
+  {
+    m_timer.stop();
+    m_currentTime = 0;
+  }
+
+  emit currentFrameChanged(m_currentTime);
+}
+
 void TimeLineWidget::on_addButton_clicked()
 {
   QString name = QInputDialog::getText(this,
@@ -163,6 +186,10 @@ void TimeLineWidget::on_comboBox_currentIndexChanged(int index)
   // Set the current animation
   m_root->setCurrentAnimation(index);
 
+  // Reset the current time
+  m_currentTime = 0;
+  m_timer.stop();
+
   // Update the UI
   Animation *ani = m_root->currentAnimation();
   if(ani)
@@ -170,6 +197,8 @@ void TimeLineWidget::on_comboBox_currentIndexChanged(int index)
     updateFramesButtonText(ani->length());
     updateFpsButtonText(ani->fps());
     ui->loopCheckBox->setChecked(ani->isLoop());
+
+    m_timer.setInterval(1000/ani->fps());
   }
 
   // Update the editors (to resize the header)
@@ -224,6 +253,9 @@ void TimeLineWidget::on_fpsButton_clicked()
   if(!ok || fps == m_root->currentAnimation()->fps())
     return;
 
+  m_timer.setInterval(1000/fps);
+  qDebug() << m_timer.interval();
+
   // Update button text
   updateFpsButtonText(fps);
 
@@ -245,6 +277,9 @@ void TimeLineWidget::setUiEnabled(bool enable)
   ui->framesButton->setEnabled(enable);
   ui->fpsButton->setEnabled(enable);
   ui->loopCheckBox->setEnabled(enable);
+
+  ui->playButton->setEnabled(enable);
+  ui->stopButton->setEnabled(enable);
 }
 
 void TimeLineWidget::updateFramesButtonText(int frames)
@@ -258,4 +293,19 @@ void TimeLineWidget::updateFramesButtonText(int frames)
 void TimeLineWidget::updateFpsButtonText(int fps)
 {
   ui->fpsButton->setText(tr(FpsButtonText).arg(fps));
+}
+
+void TimeLineWidget::on_playButton_clicked()
+{
+  if(m_timer.isActive())
+    m_timer.stop();
+  else
+    m_timer.start();
+}
+
+void TimeLineWidget::on_stopButton_clicked()
+{
+  if(m_timer.isActive())
+    m_timer.stop();
+  m_currentTime = 0;
 }

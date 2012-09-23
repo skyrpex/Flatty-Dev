@@ -5,6 +5,7 @@
 #include <joint/joint.h>
 #include <timeline/timelineheader.h>
 #include <timeline/timelinedelegate.h>
+#include <QTimer>
 
 namespace Ui {
 class TimeLineWidget;
@@ -29,16 +30,23 @@ public slots:
   void closeEditor(Joint *joint);
   void updateEditors();
 
+signals:
+  void currentFrameChanged(int frame);
+
 private slots:
+  void advanceFrame();
+
   void on_addButton_clicked();
   void on_comboBox_currentIndexChanged(int index);
   void on_removeButton_clicked();
 
   void on_framesButton_clicked();
-
   void on_fpsButton_clicked();
-
   void on_loopCheckBox_clicked(bool checked);
+
+  void on_playButton_clicked();
+
+  void on_stopButton_clicked();
 
 private:
   void setUiEnabled(bool enable);
@@ -49,6 +57,8 @@ private:
   TimeLineHeader *m_header;
   TimeLineDelegate *m_delegate;
   Joint *m_root;
+  QTimer m_timer;
+  int m_currentTime;
 };
 
 #endif // TIMELINEWIDGET_H
