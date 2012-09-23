@@ -31,14 +31,20 @@ public slots:
 
 private slots:
   void on_addButton_clicked();
-
   void on_comboBox_currentIndexChanged(int index);
+  void on_removeButton_clicked();
 
   void on_framesButton_clicked();
 
-  void on_removeButton_clicked();
+  void on_fpsButton_clicked();
+
+  void on_loopCheckBox_clicked(bool checked);
 
 private:
+  void setUiEnabled(bool enable);
+  void updateFramesButtonText(int frames);
+  void updateFpsButtonText(int fps);
+
   Ui::TimeLineWidget *ui;
   TimeLineHeader *m_header;
   TimeLineDelegate *m_delegate;

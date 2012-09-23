@@ -76,6 +76,26 @@
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QPushButton" name="fpsButton">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>fps</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="loopCheckBox">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>Is a loop</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item>

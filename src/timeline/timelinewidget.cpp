@@ -3,6 +3,10 @@
 #include <QScrollBar>
 #include <QInputDialog>
 
+static const char* FramesButtonTextSingular = "1 frame";
+static const char* FramesButtonText = "%1 frames";
+static const char* FpsButtonText = "%1 fps";
+
 TimeLineWidget::TimeLineWidget(QWidget *parent) :
   QWidget(parent),
   ui(new Ui::TimeLineWidget),
@@ -151,10 +155,7 @@ void TimeLineWidget::on_addButton_clicked()
   ui->comboBox->setCurrentIndex(ui->comboBox->count()-1);
 
   // Enable the UI
-  ui->splitter->setEnabled(true);
-  ui->comboBox->setEnabled(true);
-  ui->removeButton->setEnabled(true);
-  ui->framesButton->setEnabled(true);
+  setUiEnabled(true);
 }
 
 void TimeLineWidget::on_comboBox_currentIndexChanged(int index)
@@ -162,24 +163,14 @@ void TimeLineWidget::on_comboBox_currentIndexChanged(int index)
   // Set the current animation
   m_root->setCurrentAnimation(index);
 
-  // Update the editors (to resize the header)
-  updateEditors();
-}
-
-void TimeLineWidget::on_framesButton_clicked()
-{
-  // Get the animation length from the user
-  bool ok;
-  int value = 60;
-  int length = QInputDialog::getInteger(this,
-                                        tr("Animation length"),
-                                        tr("Frames"),
-                                        value, 1, 9999, 1, &ok);
-  if(!ok)
-    return;
-
-  // Set the animation length
-  m_root->setCurrentAnimationLength(length);
+  // Update the UI
+  Animation *ani = m_root->currentAnimation();
+  if(ani)
+  {
+    updateFramesButtonText(ani->length());
+    updateFpsButtonText(ani->fps());
+    ui->loopCheckBox->setChecked(ani->isLoop());
+  }
 
   // Update the editors (to resize the header)
   updateEditors();
@@ -196,8 +187,75 @@ void TimeLineWidget::on_removeButton_clicked()
   ui->comboBox->removeItem(index);
 
   // Disable the UI if no more animations left
-  ui->splitter->setEnabled(ui->comboBox->count());
-  ui->comboBox->setEnabled(ui->comboBox->count());
-  ui->removeButton->setEnabled(ui->comboBox->count());
-  ui->framesButton->setEnabled(ui->comboBox->count());
+  setUiEnabled(ui->comboBox->count());
+}
+
+void TimeLineWidget::on_framesButton_clicked()
+{
+  // Get the animation length from the user
+  bool ok;
+  int value = 60;
+  int frames = QInputDialog::getInteger(this,
+                                        tr("Animation length"),
+                                        tr("Frames"),
+                                        value, 1, 9999, 1, &ok);
+  if(!ok || frames == m_root->currentAnimation()->length())
+    return;
+
+  // Update button text
+  updateFramesButtonText(frames);
+
+  // Set the animation length
+  m_root->setCurrentAnimationLength(frames);
+
+  // Update the editors (to resize the header)
+  updateEditors();
+}
+
+void TimeLineWidget::on_fpsButton_clicked()
+{
+  // Get the animation length from the user
+  bool ok;
+  int value = 60;
+  int fps = QInputDialog::getInteger(this,
+                                     tr("Animation speed"),
+                                     tr("Frames per second"),
+                                     value, 1, 9999, 1, &ok);
+  if(!ok || fps == m_root->currentAnimation()->fps())
+    return;
+
+  // Update button text
+  updateFpsButtonText(fps);
+
+  // Set the animation length
+  m_root->setCurrentAnimationFps(fps);
+}
+
+void TimeLineWidget::on_loopCheckBox_clicked(bool checked)
+{
+  m_root->setCurrentAnimationIsLoop(checked);
+}
+
+void TimeLineWidget::setUiEnabled(bool enable)
+{
+  ui->splitter->setEnabled(enable);
+  ui->comboBox->setEnabled(enable);
+  ui->removeButton->setEnabled(enable);
+
+  ui->framesButton->setEnabled(enable);
+  ui->fpsButton->setEnabled(enable);
+  ui->loopCheckBox->setEnabled(enable);
+}
+
+void TimeLineWidget::updateFramesButtonText(int frames)
+{
+  const char *text = (frames == 1)?
+        FramesButtonTextSingular
+      : FramesButtonText;
+  ui->framesButton->setText(tr(text).arg(frames));
+}
+
+void TimeLineWidget::updateFpsButtonText(int fps)
+{
+  ui->fpsButton->setText(tr(FpsButtonText).arg(fps));
 }

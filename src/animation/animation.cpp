@@ -3,11 +3,13 @@
 #include <mathhelper.h>
 
 const int Animation::s_defaultLength = 60;
+static const int DefaultFps = 60;
 
 Animation::Animation(Joint *joint)
   : m_joint(joint)
   , m_length(s_defaultLength)
   , m_isLoop(true)
+  , m_fps(DefaultFps)
 {
   insert(0, new KeyFrame);
 }
@@ -59,6 +61,26 @@ void Animation::setLength(int length)
     else
       ++it;
   }
+}
+
+int Animation::fps() const
+{
+  return m_fps;
+}
+
+void Animation::setFps(int fps)
+{
+  m_fps = fps;
+}
+
+bool Animation::isLoop() const
+{
+  return m_isLoop;
+}
+
+void Animation::setIsLoop(bool loop)
+{
+  m_isLoop = loop;
 }
 
 Joint *Animation::joint() const

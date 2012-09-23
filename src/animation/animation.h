@@ -20,6 +20,12 @@ public:
   int length() const;
   void setLength(int length);
 
+  int fps() const;
+  void setFps(int fps);
+
+  bool isLoop() const;
+  void setIsLoop(bool loop);
+
   Joint *joint() const;
 
 private:
@@ -33,6 +39,7 @@ private:
   static const int s_defaultLength;
   int m_length;
   bool m_isLoop;
+  int m_fps;
 };
 
 Q_DECLARE_METATYPE(Animation*)

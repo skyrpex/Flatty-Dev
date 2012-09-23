@@ -66,14 +66,34 @@ void Joint::setPoseMode()
   setCurrentFrame(0);
 }
 
-void Joint::setCurrentAnimationLength(int i)
+void Joint::setCurrentAnimationLength(int frames)
 {
   Animation *anim = currentAnimation();
   if(anim)
-    anim->setLength(i);
+    anim->setLength(frames);
 
   foreach(Joint *child, childJoints())
-    child->setCurrentAnimationLength(i);
+    child->setCurrentAnimationLength(frames);
+}
+
+void Joint::setCurrentAnimationFps(int fps)
+{
+  Animation *anim = currentAnimation();
+  if(anim)
+    anim->setFps(fps);
+
+  foreach(Joint *child, childJoints())
+    child->setCurrentAnimationFps(fps);
+}
+
+void Joint::setCurrentAnimationIsLoop(bool isLoop)
+{
+  Animation *anim = currentAnimation();
+  if(anim)
+    anim->setIsLoop(isLoop);
+
+  foreach(Joint *child, childJoints())
+    child->setCurrentAnimationIsLoop(isLoop);
 }
 
 void Joint::createAnimation()
