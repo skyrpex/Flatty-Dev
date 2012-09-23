@@ -22,15 +22,26 @@ KeyFrame Animation::displayFrameData(int frame) const
   ConstIterator c = iterators.second;
   ConstIterator d = next(iterators.second);
 
-  int previousFrame = b.key();
-  int nextFrame = c.key();
-  if(nextFrame-previousFrame == 0)
+  int ka = a.key();
+  int kb = b.key();
+  int kc = c.key();
+  int kd = d.key();
+
+  // Is there something to interpolate?
+  if(kc-kb == 0)
     return *b.value();
 
-  if(nextFrame < previousFrame)
-    nextFrame += length();
+  // Normalize times
+  if(ka > frame)
+    ka -= length();
+  if(kb > frame)
+    kb -= length();
+  if(kc < frame)
+    kc += length();
+  if(kd < frame)
+    kd += length();
 
-  qreal p = qreal(frame-previousFrame)/qreal(nextFrame-previousFrame);
+  qreal p = qreal(frame-kb)/qreal(kc-kb);
 
   KeyFrame keyFrame;
   keyFrame.rotation = Math::catmullRomInterpolation(a.value()->rotation, b.value()->rotation,
